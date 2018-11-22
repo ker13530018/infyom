@@ -1,0 +1,95 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "title",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required|max:100",
+        "searchable": true
+    },
+
+    {
+        "name": "description",
+        "dbType": "string",
+        "htmlType": "textarea",
+        "validations": "required|max:250",
+        "searchable": true
+    },
+    {
+        "name": "og_type",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required|max:50",
+        "searchable": true
+    },
+    {
+        "name": "og_description",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required|max:200",
+        "searchable": true
+    },
+    {
+        "name": "og_images",
+        "dbType": "string",
+        "htmlType": "file",
+        "validations": "",
+        "searchable": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "robots",
+        "dbType": "string",
+        "htmlType": "select,:follow:index, follow,unfollow:Noindex , Nofollow",
+        "validations": "",
+        "searchable": false
+    },
+    {
+        "name": "body",
+        "dbType": "text",
+        "htmlType": "textarea",
+        "validations": "required",
+        "fillable": true,
+        "inForm": true,
+        "inIndex": false,
+        "searchable": false
+    },
+    {
+        "name": "status",
+        "dbType": "integer",
+        "htmlType": "radio,Active:1,InActive:0",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+]
