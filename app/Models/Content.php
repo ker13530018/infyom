@@ -37,7 +37,8 @@ class Content extends Model
         'og_images',
         'robots',
         'body',
-        'status'
+        'status',
+        'created_at'
     ];
 
     /**

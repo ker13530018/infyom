@@ -125,12 +125,12 @@ class ContentController extends AppBaseController
 
             return redirect(route('contents.index'));
         }
-
-        $path = $request->file('og_images')->store('public/upload');
-        //get request all
+        
         $all = $request->all();
-        //new assign to field
-        $all["og_images"] = str_replace("public", "", $path);
+        if ($request->hasFile('update_og_images')) {
+            $path = $request->file('update_og_images')->store('public/upload');
+            $all["og_images"] = str_replace("public", "", $path);
+        }
 
         $content = $this->contentRepository->update($all, $id);
 
