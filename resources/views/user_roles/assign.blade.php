@@ -11,9 +11,9 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'userRoles.store']) !!}
+                    {!! Form::open(['route' => ['userRoles.role',$user->id] , 'method' => 'POST' ]) !!}
 
-                        @include('user_roles.fields', ['roles' => $roles])
+                        @include('user_roles.fields', ['roles' => $roles , 'user' => $user])
 
                     {!! Form::close() !!}
                 </div>

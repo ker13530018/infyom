@@ -26,4 +26,7 @@ Route::resource('roles', 'RolesController');
 
 Route::resource('userRoles', 'UserRolesController');
 
+Route::get('/userRoles/{id}/assign', 'UserRolesController@assign')->name('userRoles.assign');
+Route::post('/userRoles/{id}/role', 'UserRolesController@role')->name('userRoles.role');
+
 Route::resource('contents', 'ContentController');

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+// Request
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateUserRolesRequest;
 use App\Http\Requests\UpdateUserRolesRequest;
+// Repository
+use App\Repositories\RolesRepository;
 use App\Repositories\UserRolesRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
+use App\Repositories\UsersRepository;
 use Flash;
+use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -16,9 +20,17 @@ class UserRolesController extends AppBaseController
     /** @var  UserRolesRepository */
     private $userRolesRepository;
 
-    public function __construct(UserRolesRepository $userRolesRepo)
+    /** @var  RolesRepository */
+    private $rolesRepository;
+
+    /** @var  UsersRepository */
+    private $usersRepository;
+
+    public function __construct(UserRolesRepository $userRolesRepo, RolesRepository $rolesRepo, UsersRepository $userRepo)
     {
         $this->userRolesRepository = $userRolesRepo;
+        $this->rolesRepository = $rolesRepo;
+        $this->usersRepository = $userRepo;
     }
 
     /**
@@ -41,9 +53,12 @@ class UserRolesController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('user_roles.create');
+        $this->rolesRepository->pushCriteria(new RequestCriteria($request));
+        $roles = $this->rolesRepository->all();
+
+        return view('user_roles.create')->with('roles', $roles);
     }
 
     /**
@@ -85,13 +100,58 @@ class UserRolesController extends AppBaseController
     }
 
     /**
+     * Assign the specified UserRoles.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function assign($id, Request $request)
+    {
+        $user = $this->usersRepository->findWithoutFail($id);
+        if (empty($user)) {
+            Flash::error('User not found');
+
+            return redirect(route('users.index'));
+        }
+
+        $this->rolesRepository->pushCriteria(new RequestCriteria($request));
+        $roles = $this->rolesRepository->all();
+
+        return view('user_roles.assign')->with('user', $user)->with('roles', $roles);
+    }
+
+    /**
+     * Assign the specified UserRoles.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function role($id, Request $request)
+    {
+        $userRoles = $this->userRolesRepository->findWhere(['user_id' => $id]);
+        if ($userRoles->isEmpty()) {
+            // insert process
+            $this->userRolesRepository->create($request->all());
+            Flash::success('User Roles create successfully.');
+        } else {
+            //update process
+            $this->userRolesRepository->update($request->all(), $userRoles->id);
+            Flash::success('User Roles update successfully.');
+        }
+        
+        return redirect(route('users.index'));
+    }
+
+    /**
      * Show the form for editing the specified UserRoles.
      *
      * @param  int $id
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $userRoles = $this->userRolesRepository->findWithoutFail($id);
 
