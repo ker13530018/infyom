@@ -1,13 +1,13 @@
 <table class="table table-responsive" id="users-table">
     <thead>
         <tr>
-        <th>IDx</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Remember Token</th>
-        <th>Created At</th>
-            <th colspan="3">Action</th>
+            <th>IDx</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Remember Token</th>
+            <th>Created At</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -31,4 +31,23 @@
         </tr>
     @endforeach
     </tbody>
+    <!-- <tfoot>
+        <tr>
+            <th>IDx</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Remember Token</th>
+            <th>Created At</th>
+            <th colspan="3">Action</th>
+        </tr>
+    </tfoot> -->
 </table>
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#users-table').DataTable();
+        });
+    </script>
+@endsection
