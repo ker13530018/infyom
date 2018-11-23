@@ -62,7 +62,7 @@ class UserRoles extends Model
      **/
     public function role()
     {
-        return $this->belongsTo(\App\Models\Role::class);
+        return $this->belongsTo(\App\Models\Roles::class);
     }
 
     /**
@@ -70,6 +70,6 @@ class UserRoles extends Model
      **/
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\Users::class);
     }
 }

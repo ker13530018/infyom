@@ -6,25 +6,45 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Users
- * @package App\Models
- * @version November 22, 2018, 3:44 am UTC
- *
- * @property string name
- * @property string email
- * @property string|\Carbon\Carbon email_verified_at
- * @property string password
- * @property string remember_token
+ * @SWG\Definition(
+ *      definition="Users",
+ *      required={""},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="email",
+ *          description="email",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="password",
+ *          description="password",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="remember_token",
+ *          description="remember_token",
+ *          type="string"
+ *      )
+ * )
  */
 class Users extends Model
 {
     use SoftDeletes;
 
     public $table = 'users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
 
     protected $dates = ['deleted_at'];
 
@@ -35,7 +55,7 @@ class Users extends Model
         'email',
         'email_verified_at',
         'password',
-        'remember_token'
+        'remember_token',
     ];
 
     /**
@@ -48,7 +68,7 @@ class Users extends Model
         'name' => 'string',
         'email' => 'string',
         'password' => 'string',
-        'remember_token' => 'string'
+        'remember_token' => 'string',
     ];
 
     /**
@@ -57,8 +77,14 @@ class Users extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function usersRoles()
+    {
+        return $this->hasMany(\App\Models\UserRoles::class, 'user_id', 'id');
+    }
 }

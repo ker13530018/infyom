@@ -17,11 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::resource('contents', 'ContentAPIController');
 
-Route::resource('contents', 'ContentAPIController');
+Route::resource('roles', 'RolesAPIController');
 
-Route::resource('contents', 'ContentAPIController');
 
-Route::resource('contents', 'ContentAPIController');
+Route::resource('users', 'UsersAPIController');

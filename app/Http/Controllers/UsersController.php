@@ -30,7 +30,7 @@ class UsersController extends AppBaseController
     public function index(Request $request)
     {
         $this->usersRepository->pushCriteria(new RequestCriteria($request));
-        $users = $this->usersRepository->all();
+        $users = $this->usersRepository->paginate(20);
 
         return view('users.index')
             ->with('users', $users);

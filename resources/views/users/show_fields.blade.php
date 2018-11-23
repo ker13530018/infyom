@@ -34,6 +34,12 @@
     <p>{!! $users->remember_token !!}</p>
 </div>
 
+<div class="form-group">
+    {!! Form::label('role', 'Role:') !!}
+    <p>{!! $users->usersRoles->first()->role->name !!}</p>
+</div>
+
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}
@@ -44,5 +50,11 @@
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $users->updated_at !!}</p>
+</div>
+
+<!-- Deleted At Field -->
+<div class="form-group">
+    {!! Form::label('deleted_at', 'Deleted At:') !!}
+    <p>{!! $users->deleted_at !!}</p>
 </div>
 

@@ -6,13 +6,26 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Roles
- * @package App\Models
- * @version November 22, 2018, 4:05 am UTC
- *
- * @property \Illuminate\Database\Eloquent\Collection UsersRole
- * @property string name
- * @property boolean status
+ * @SWG\Definition(
+ *      definition="Roles",
+ *      required={""},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="status",
+ *          description="status",
+ *          type="boolean"
+ *      )
+ * )
  */
 class Roles extends Model
 {

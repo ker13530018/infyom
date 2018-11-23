@@ -10,7 +10,7 @@
     @foreach($roles as $roles)
         <tr>
             <td>{!! $roles->name !!}</td>
-            <td>{!! $roles->status !!}</td>
+            <td>{!! $roles->status == 1 ? "Active" : "Inactive" !!}</td>
             <td>
                 {!! Form::open(['route' => ['roles.destroy', $roles->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
