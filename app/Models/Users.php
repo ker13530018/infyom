@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @SWG\Definition(
@@ -37,9 +38,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-class Users extends Model
+class Users extends Authenticatable
 {
-    use SoftDeletes;
+    use SoftDeletes, Notifiable;
 
     public $table = 'users';
 
@@ -77,7 +78,12 @@ class Users extends Model
      * @var array
      */
     public static $rules = [
+        'email' => 'required|min:4|max:255',
+        'password' => 'required|min:8|max:16',
+    ];
 
+    protected $hidden = [
+        'password', 'remember_token',
     ];
 
     /**

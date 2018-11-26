@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUsersRequest;
 use App\Http\Requests\UpdateUsersRequest;
+
 use App\Repositories\UsersRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class UsersController extends AppBaseController
     public function index(Request $request)
     {
         $this->usersRepository->pushCriteria(new RequestCriteria($request));
-        $users = $this->usersRepository->paginate(20);
+        $users = $this->usersRepository->all();
 
         return view('users.index')
             ->with('users', $users);
