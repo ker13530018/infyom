@@ -31,7 +31,7 @@ class ContentController extends AppBaseController
     {
         $this->contentRepository->pushCriteria(new RequestCriteria($request));
         $contents = $this->contentRepository->all();
-
+        $contents = $contents->sortByDesc('id');
         return view('contents.index')
             ->with('contents', $contents);
     }
