@@ -9,4 +9,4 @@ services:
         command: sh -c "chmod -R 777 storage && supervisord -n"
         volumes:
             - .env:/var/www/html/.env
-            - vendor:/var/www/html/vendor
+            - ./vendor:/var/www/html/vendor
