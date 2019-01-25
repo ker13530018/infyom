@@ -6,7 +6,8 @@ WORKDIR /var/www/html
 
 RUN rm -rf composer.lock 
 RUN chmod -R 777 storage
-# RUN composer install  --no-dev 
+
+RUN composer install  --no-dev 
 # COPY env.example .env
 
 # Executing supervisord
