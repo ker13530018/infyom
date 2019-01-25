@@ -1,0 +1,11 @@
+version: '3'
+services:
+    infyom:
+        image: kerkoleng/infyom:latest 
+        container_name: infyom
+        build: .
+        ports:
+            - '8080:80'
+        command: sh -c "chmod -R 777 storage && supervisord -n"
+        volumes:
+            - .env:/var/www/html/.env
